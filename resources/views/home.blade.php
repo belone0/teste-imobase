@@ -8,11 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                        <a href="{{route('imoveis.create')}}" class="btn btn-primary">Create Imovel</a>
 
                     {{ __('You are logged in!') }}
                 </div>
