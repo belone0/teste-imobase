@@ -6,11 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
                         <a href="{{route('imoveis.create')}}" class="btn btn-primary">Create Imovel</a>
+                    <a href="{{route('imoveis.index')}}" class="btn btn-primary">Index imoveis</a>
 
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>

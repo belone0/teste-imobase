@@ -18,6 +18,6 @@ class Imovel extends Model
         'address',
         'type',
         'value',
-        'owner',
+        'user_id',
     ];
 }

@@ -9,12 +9,12 @@ class ImovelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo'=>'image|mimes:jpeg,png,jpg|max:2048',
-            'title'=>'string',
-            'address'=>'string',
-            'type'=>'string',
-            'value'=>'integer',
-            'owner'=>'string',
+            'user_id' => 'integer |required',
+            'photo' => 'image|mimes:jpeg,png,jpg|max:2048 |required',
+            'title' => 'string |required',
+            'address' => 'string |required',
+            'type' => 'string |required',
+            'value' => 'integer |required',
         ];
     }
 }
