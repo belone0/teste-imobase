@@ -84,7 +84,6 @@
                 return;
             }
 
-
             await axios.post('/search-imoveis/' + search_param)
                 .then(function (response) {
                     resetDivContent();

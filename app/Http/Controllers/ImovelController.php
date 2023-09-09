@@ -29,16 +29,16 @@ class ImovelController extends Controller
             $imovel->user_id = auth()->user()->id;
 
             $extension = $request->file('photo')->extension();
-            $file_name = "foto-imovel.".$extension;
-            $upload = $request->file('photo')->storeAs('public/images/foto-imovel/'.$imovel->id.'/', $file_name);
-            $img_path = 'storage/images/foto-imovel/'.$imovel->id.'/'.$file_name;
+            $file_name = "foto-imovel." . $extension;
+            $upload = $request->file('photo')->storeAs('public/images/foto-imovel/' . $imovel->id . '/', $file_name);
+            $img_path = 'storage/images/foto-imovel/' . $imovel->id . '/' . $file_name;
             $imovel->photo = $img_path;
 
             $imovel->save();
 
             DB::commit();
             return 'ok';
-        }catch (\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
             return 'erro';
         }
@@ -47,7 +47,7 @@ class ImovelController extends Controller
     public function show($id)
     {
         $imovel = Imovel::find($id);
-        return view('imovel.show',compact('imovel'));
+        return view('imovel.show', compact('imovel'));
     }
 
     public function edit($id)
@@ -63,11 +63,14 @@ class ImovelController extends Controller
         dd('asdasd');
     }
 
-    public function getAllImoveis(){
+    public function getAllImoveis()
+    {
         return response()->json(Imovel::all());
     }
-    public function searchImoveis($param){
-        $imoveis = Imovel::where('title','LIKE', '%'.$param.'%')->orWhere('address','LIKE', '%'.$param.'%');
+
+    public function searchImoveis($param)
+    {
+        $imoveis = Imovel::where('title', 'LIKE', '%' . $param . '%')->orWhere('address', 'LIKE', '%' . $param . '%');
         return $imoveis->get();
     }
 }
