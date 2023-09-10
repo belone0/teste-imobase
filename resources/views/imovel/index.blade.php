@@ -18,7 +18,6 @@
                     <div class="card-body">
                         <div id="imoveis-div" class="row d-flex justify-content-center gap-4 p-3">
                         </div>
-
                     </div>
                 </div>
             </div>
