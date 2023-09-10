@@ -3,17 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Imobase') }}</title>
-
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
@@ -71,10 +64,20 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+<style>
+    body{
+        background-color:hsla(210,40%,98%,1);
+        background-image:
+            radial-gradient(at 150% 150%, hsla(211,97%,50%,1) 0px, transparent 50%),
+            radial-gradient(at -50% -50%, hsla(211,97%,50%,1) 0px, transparent 50%)
+    }
+    html{
+        min-height: 100vh;
+    }
+</style>
 </html>

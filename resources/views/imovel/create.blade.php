@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Criar Imovel') }}</div>
+                    <div class="card-header">{{ __('Anunciar Imovel') }}</div>
                     <div class="card-body">
                         <div class="row p-2">
                             <div class="col-12 py-1 d-flex justify-content-center">
@@ -65,7 +65,7 @@
             axios.post('{{route('imoveis.store')}}', data)
                 .then(function (response) {
                     alert('Sucesso! Imovel cadastrado.')
-                    window.location.href = "{{route('home')}}";
+                    window.location.href = "{{route('imoveis.index')}}";
                 })
                 .catch(function (error) {
                     alert('Erro! Verifique as informações do formulário')
