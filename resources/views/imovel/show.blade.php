@@ -29,16 +29,23 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <span class="fs-3"
-                                  id="value">Cadastrado em: {{$imovel->created_at }}</span>
+                                  id="value">Anunciado em: {{$imovel->created_at }}</span>
                         </div>
                         @if($imovel->user_id == auth()->user()->id)
-                            <div class="d-flex justify-content-center mt-3">
-                                <form action="{{route('imoveis.destroy', $imovel->id)}}">
-                                    <button class="btn btn-danger">Excluir Anúncio</button>
+                            <div class="mt-2 d-flex justify-content-center gap-3">
+                                <a class="btn btn-dark" href="{{route('imoveis.edit', $imovel)}}">Editar Anuncio</a>
+                                <form method="POST"
+                                      action="{{route('imoveis.destroy', $imovel->id)}}"
+                                      accept-charset="UTF-8" style="display:inline">
+                                    {{ method_field('DELETE') }}
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger "
+                                            title="Deletar Imóvél"
+                                            onclick="return confirm(&quot;Confirm delete?&quot;)">Excluir Anúncio
+                                    </button>
                                 </form>
                             </div>
                         @endif
-
                     </div>
                 </div>
             </div>

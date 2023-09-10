@@ -52,15 +52,29 @@ class ImovelController extends Controller
 
     public function edit($id)
     {
+        $imovel = Imovel::find($id);
+        return view('imovel.edit', compact('imovel'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ImovelRequest $request, $imovel)
     {
+        $data = $request->validated();
+        $imovel = Imovel::find($imovel);
+
+        $extension = $request->file('photo')->extension();
+        $file_name = "foto-imovel." . $extension;
+        $upload = $request->file('photo')->storeAs('public/images/foto-imovel/' . $imovel->id . '/', $file_name);
+        $img_path = 'storage/images/foto-imovel/' . $imovel->id . '/' . $file_name;
+        $data['photo'] = $img_path;
+
+        $imovel->update($data);
+        return redirect()->route('imoveis.index');
     }
 
     public function destroy($id)
     {
-        dd('asdasd');
+        Imovel::destroy($id);
+        return redirect()->route('imoveis.index');
     }
 
     public function getAllImoveis()

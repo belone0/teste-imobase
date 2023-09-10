@@ -30,6 +30,15 @@
             </div>
         </div>
     </div>
+    <style>
+        .imovel_link {
+            border: 1px solid lightgray;
+            border-radius: 10px;
+        }
+        .imovel_link:hover {
+            border-color: #087cfc;
+        }
+    </style>
     <script>
         var imoveis_div = document.getElementById('imoveis-div');
         var search = document.getElementById('search-btn');
@@ -51,12 +60,12 @@
         }
 
         function loadImoveis(imovel) {
-
             let url = "{{ route('imoveis.show', ['imovei' => '__replace']) }}";
             show_url = url.replace('__replace', imovel.id);
 
             imoveis_div.innerHTML += `
-                <a id="imovel_link" class=" border text-black col-12 col-md-6 col-lg-3 text-decoration-none rounded p-2 " href="${show_url}">
+                <div class="imovel_link  col-12 col-md-6 col-lg-3 rounded p-2">
+                <a id="imovel_link" class=" text-black text-decoration-none  " href="${show_url}">
                     <div class="mt-3 d-flex justify-content-center">
                          <img class=" rounded" width="150" height="150" src=" ${imovel.photo}" alt="">
                     </div>
@@ -73,6 +82,7 @@
                         <span id="value">R$ ${imovel.value}</span>
                     </div>
                 </a>
+                </div>
             `;
         }
 
@@ -104,6 +114,5 @@
         function resetDivContent() {
             imoveis_div.innerHTML = '';
         }
-
     </script>
 @endsection
