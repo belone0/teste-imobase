@@ -6,6 +6,7 @@ use App\Http\Requests\ImovelRequest;
 use App\Models\Imovel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ImovelController extends Controller
 {
@@ -26,8 +27,6 @@ class ImovelController extends Controller
             DB::beginTransaction();
             $imovel = Imovel::create($data);
 
-            $imovel->user_id = auth()->user()->id;
-
             $extension = $request->file('photo')->extension();
             $file_name = "foto-imovel." . $extension;
             $upload = $request->file('photo')->storeAs('public/images/foto-imovel/' . $imovel->id . '/', $file_name);
@@ -35,11 +34,12 @@ class ImovelController extends Controller
             $imovel->photo = $img_path;
 
             $imovel->save();
-
             DB::commit();
+
             return 'ok';
         } catch (\Throwable $th) {
             DB::rollBack();
+            Log::error($th->getMessage());
             return 'erro';
         }
     }
@@ -59,16 +59,24 @@ class ImovelController extends Controller
     public function update(ImovelRequest $request, $imovel)
     {
         $data = $request->validated();
-        $imovel = Imovel::find($imovel);
+        try{
+            $imovel = Imovel::find($imovel);
 
-        $extension = $request->file('photo')->extension();
-        $file_name = "foto-imovel." . $extension;
-        $upload = $request->file('photo')->storeAs('public/images/foto-imovel/' . $imovel->id . '/', $file_name);
-        $img_path = 'storage/images/foto-imovel/' . $imovel->id . '/' . $file_name;
-        $data['photo'] = $img_path;
+            if($request->photo){
+                $extension = $request->file('photo')->extension();
+                $file_name = "foto-imovel." . $extension;
+                $upload = $request->file('photo')->storeAs('public/images/foto-imovel/' . $imovel->id . '/', $file_name);
+                $img_path = 'storage/images/foto-imovel/' . $imovel->id . '/' . $file_name;
+                $data['photo'] = $img_path;
+            }
 
-        $imovel->update($data);
-        return redirect()->route('imoveis.index');
+            $imovel->update($data);
+
+            return redirect()->route('imoveis.index');
+        }catch (\Throwable $th){
+            return redirect()->route('imoveis.index');
+        }
+
     }
 
     public function destroy($id)

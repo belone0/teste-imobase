@@ -10,7 +10,7 @@ class ImovelRequest extends FormRequest
     {
         return [
             'user_id' => 'integer |required',
-            'photo' => 'image|mimes:jpeg,png,jpg|max:2048 |required',
+            'photo' => 'image|mimes:jpeg,png,jpg|max:2048 |nullable',
             'title' => 'string |required',
             'address' => 'string |required',
             'type' => 'string |required',

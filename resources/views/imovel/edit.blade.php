@@ -12,16 +12,14 @@
                     <div class="card-body">
                         <div class="row p-2">
                             <div class="col-12 py-1 d-flex justify-content-center">
-                                <div class="d-none card img-fluid justify-content-center" id="div-img-render"
+                                <div class="card img-fluid justify-content-center" id="div-img-render"
                                      style="width:fit-content">
                                     <img class="card-img" id="img-render" src="{{ asset($imovel->photo ?? '') }}"
                                          style="min-width:50px; min-height:50px;max-width:450px; max-height:450px;"/>
                                 </div>
                             </div>
-                            <p id="warning" class="text-danger">Favor enviar a foto do imóvel novamente ao editar!</p>
                             <div class="col-12 py-1">
                                 <label>Foto</label>
-                                {{--nao consegui trazer a imagem default aqui e nao vai dar tempo de arrumar--}}
                                 <input id="photo" name="photo" value="{{ asset($imovel->photo )?? ''}}" type="file" class="form-control">
                             </div>
                             <div class="col-12 py-1 ">
@@ -52,28 +50,5 @@
             </div>
         </div>
     </div>
-    <script>
-        image_preview_div = document.getElementById('div-img-render')
-        image_preview_img = document.getElementById('img-render')
-        photo = document.getElementById('photo')
-        warning = document.getElementById('warning')
-
-        function readURL(input) {
-            image_preview_div.classList.remove("d-none")
-            image_preview_div.classList.add("d-flex")
-            warning.classList.add('d-none')
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    image_preview_img.src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        photo.addEventListener('change', function () {
-            readURL(this);
-        })
-    </script>
+    @include('imovel.scripts.edit')
 @endsection
