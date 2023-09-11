@@ -75,7 +75,7 @@ class ImovelController extends Controller
             return redirect()->route('imoveis.index');
         }catch (\Throwable $th){
             Log::error($th->getMessage());
-            return redirect()->route('imoveis.index');
+            return redirect()->back();
         }
     }
 
